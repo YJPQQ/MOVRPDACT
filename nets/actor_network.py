@@ -39,7 +39,8 @@ class Actor(nn.Module):
         
         # see Appendix D
         if problem_name == 'tsp':
-            self.node_dim = 2
+            # self.node_dim = 2
+            self.node_dim = 6
         elif problem_name == 'cvrp':
             self.node_dim = 7
         else:            
@@ -70,7 +71,7 @@ class Actor(nn.Module):
         trainable_num = sum(p.numel() for p in self.parameters() if p.requires_grad)
         return {'Total': total_num, 'Trainable': trainable_num}
 
-    def forward(self, problem, x_in, solution, exchange, do_sample = False, fixed_action = None, require_entropy = False, to_critic = False, only_critic  = False):
+    def forward(self, problem, x_in, solution, exchange, pref, do_sample = False, fixed_action = None, require_entropy = False, to_critic = False, only_critic  = False):
 
         bs, gs, in_d = x_in.size()
         
@@ -102,7 +103,7 @@ class Actor(nn.Module):
         
         elif problem.NAME == 'tsp':
             # pass through embedder
-            NFE, PFE, visited_time = self.embedder(x_in, solution, None)
+            NFE, PFE, visited_time = self.embedder(x_in, solution, pref, None)
             
             # mask infeasible solutions
             mask_table = problem.get_swap_mask(visited_time).expand(bs, gs, gs).cpu()

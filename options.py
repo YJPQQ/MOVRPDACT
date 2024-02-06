@@ -10,6 +10,8 @@ def get_options(args=None):
 
     # Overall settings
     parser.add_argument('--problem', default='tsp', choices = ['vrp', 'tsp'], help="the targeted problem to solve, default 'tsp'")
+    parser.add_argument('--dec_method', default='TCH', choices = ['TCH', 'WS'], help="the targeted METHOD to DECREMENT THE OBJS, default 'TCH'")
+    
     parser.add_argument('--graph_size', type=int, default=20, help="the number of customers in the targeted problem (graph size)")
     parser.add_argument('--dummy_rate', type=float, default=0.5, help="add DUMMY_RATE * graph_size nodes as dummy depots (for CVRP only)") # see Jupyter Notebook for example use
     # we set 0.5 for CVRP20, 0.4 for CVRP50, 0.2 for CVRP100
@@ -41,20 +43,27 @@ def get_options(args=None):
     parser.add_argument('--n_step', type=int, default=4, help='n_step for return estimation')
     parser.add_argument('--best_cl', action='store_true', default = True, help='use best solution found in CL as initial solution for training') # useful for most of cases
     parser.add_argument('--Xi_CL', type=float, default=0.25, help='hyperparameter of CL') 
-    parser.add_argument('--batch_size', type=int, default=600,help='number of instances per batch during training')
+    parser.add_argument('--batch_size', type=int, default=512,help='number of instances per batch during training')
     parser.add_argument('--epoch_end', type=int, default=200, help='maximum training epoch')
-    parser.add_argument('--epoch_size', type=int, default=12000, help='number of instances per epoch during training')
+    parser.add_argument('--epoch_size', type=int, default=512*40, help='number of instances per epoch during training')
     parser.add_argument('--lr_model', type=float, default=1e-4, help="learning rate for the actor network")
     parser.add_argument('--lr_critic', type=float, default=3e-5, help="learning rate for the critic network")
     parser.add_argument('--lr_decay', type=float, default=0.985, help='learning rate decay per epoch')
     parser.add_argument('--max_grad_norm', type=float, default=0.04, help='maximum L2 norm for gradient clipping')
+    parser.add_argument('--with_construct_before', action='store_true',default=False, help='switch to inference mode')
+    parser.add_argument('--construct_begin_epoch',type=int,default=0, help='construct_begin_epoch')
+    parser.add_argument('--construct_end_epoch',type=int,default=10, help='construct_begin_epoch')
+    parser.add_argument('--epochs_each_construct_epoch_to_learn',type=int,default=10, help='epochs_each_construct_epoch_to_learn')
+    
     
     # Inference and validation parameters
     parser.add_argument('--T_max', type=int, default=1500, help='number of steps for inference')
     parser.add_argument('--eval_only', action='store_true', help='switch to inference mode')
-    parser.add_argument('--val_size', type=int, default=1000, help='number of instances for validation/inference')
-    parser.add_argument('--val_dataset', type=str, default = './datasets/tsp_20_10000.pkl', help='dataset file path')
+    parser.add_argument('--val_size', type=int, default=200, help='number of instances for validation/inference')
+    parser.add_argument('--val_dataset', type=str, default = '/home/pjy/OPEN_SOURCE_CODE/VRP-DACT/data/testdata_tsp_size20.pt', help='dataset file path')
     parser.add_argument('--val_m', type=int, default=1, help='number of data augments (<=8)')
+    parser.add_argument('--n_sols', type=int, default=40, help='the num of sub-problem')
+    parser.add_argument('--validate_interval', type=int, default=10, help='the num of epochs of validate_interval')
 
     # resume and load models
     parser.add_argument('--load_path', default = None, help='path to load model parameters and optimizer state from')
