@@ -64,7 +64,10 @@ def get_options(args=None):
     parser.add_argument('--val_m', type=int, default=1, help='number of data augments (<=8)')
     parser.add_argument('--n_sols', type=int, default=40, help='the num of sub-problem')
     parser.add_argument('--validate_interval', type=int, default=10, help='the num of epochs of validate_interval')
-
+    parser.add_argument('--test_data', default="randomData", help='test data:random,kroab100,krobc100')
+    
+    
+    
     # resume and load models
     parser.add_argument('--load_path', default = None, help='path to load model parameters and optimizer state from')
     parser.add_argument('--resume', default = None, help='resume from previous checkpoint file')

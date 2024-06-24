@@ -10,6 +10,7 @@ from tensorboard_logger import Logger as TbLogger
 import sys
 import numpy
 import hvwfg
+from matplotlib import pyplot as plt
 
 def cal_ps_hv(pf, pf_num, ref, ideal=None):
     if ideal is None and ref.shape[0] == 2:
@@ -88,7 +89,9 @@ def validate(rank, problem, agent, val_dataset, tb_logger, distributed = False, 
         prefs[i, 1] = i / (n_sols - 1)
 
     
-        
+
+    timer_start = time.time()
+      
     for batch_id, batch in enumerate(val_dataloader):
         assert batch_id < 1
         sols = np.zeros([opts.val_size, n_sols, 2])
@@ -152,6 +155,13 @@ def validate(rank, problem, agent, val_dataset, tb_logger, distributed = False, 
                             epoch = _id)
                 
             if distributed and opts.distributed: dist.barrier()
+            
+            
+        timer_end = time.time()
+        total_time = timer_end - timer_start
+        
+        
+        
         
         if problem.size == 20:
             ref = np.array([15,15])    #20
@@ -159,7 +169,8 @@ def validate(rank, problem, agent, val_dataset, tb_logger, distributed = False, 
             ref = np.array([30,30])   #50
         elif problem.size == 100:
             ref = np.array([60,60])   #100
-        
+        elif problem.size == 150:
+            ref = np.array([85,85])   #100
         #ref = np.array([60,60])   #100
         p_sols_num = np.full((opts.val_size,), n_sols)
     
@@ -167,6 +178,22 @@ def validate(rank, problem, agent, val_dataset, tb_logger, distributed = False, 
     
         print("HV: {:.4f}".format(specific_hv.mean()))
         print('HV Ratio: {:.4f}'.format(hvs.mean()))
+        
+        print('Run Time(s): {:.4f}'.format(total_time))
+        avg_sols = np.mean(sols, axis=0)
+        file_name="/home/pjy/mycode/pareto_results/SMODACT_JUNIOR_MOTSP_"+str(problem.size)+"_"+opts.step_method+str(opts.T_max)+"_"+str(opts.n_sols)+"_"+opts.test_data+".txt"
+        with open(file_name,'w') as f:  
+            for i in range(n_sols):
+                f.write(str([avg_sols[i,0],avg_sols[i,1]])+"\n")
+    
+    
+     
+        fig = plt.figure()
+
+        plt.plot(avg_sols[:,0],avg_sols[:,1], marker = 'o', c = 'C1',ms = 3,  label='SMODACT_JUNIOR_MOTSP_'+str(problem.size)+opts.step_method + str(opts.T_max) + "_" + str(opts.n_sols)+"_"+opts.test_data)
+    
+        plt.legend()
+        plt.savefig("./SMODACT_JUNIOR_MOTSP_"+str(problem.size) + opts.step_method + str(opts.T_max) + "_" + str(opts.n_sols)+"_"+opts.test_data) 
         
 def validate_with_construct(rank, problem, agent, val_dataset, tb_logger, construct_epoch, distributed = False, _id = None):
             
@@ -211,12 +238,14 @@ def validate_with_construct(rank, problem, agent, val_dataset, tb_logger, constr
     
     s_time = time.time()
     
-    n_sols = 40
+    n_sols = opts.n_sols
     prefs = torch.zeros(n_sols, 2).cuda()
     for i in range(n_sols):
         prefs[i, 0] = 1 - i / (n_sols - 1)
         prefs[i, 1] = i / (n_sols - 1)
 
+    
+    timer_start = time.time()
     
         
     for batch_id, batch in enumerate(val_dataloader):
@@ -284,12 +313,20 @@ def validate_with_construct(rank, problem, agent, val_dataset, tb_logger, constr
                 
             if distributed and opts.distributed: dist.barrier()
         
+        timer_end = time.time()
+        total_time = timer_end - timer_start
+        
+        
+        
+        
         if problem.size == 20:
             ref = np.array([15,15])    #20
         elif problem.size == 50:
             ref = np.array([30,30])   #50
         elif problem.size == 100:
             ref = np.array([60,60])   #100
+        elif problem.size == 150:
+            ref = np.array([85,85])   #100
         
         #ref = np.array([60,60])   #100
         p_sols_num = np.full((opts.val_size,), n_sols)
@@ -298,3 +335,20 @@ def validate_with_construct(rank, problem, agent, val_dataset, tb_logger, constr
     
         print("HV: {:.4f}".format(specific_hv.mean()))
         print('HV Ratio: {:.4f}'.format(hvs.mean()))
+        
+        
+        print('Run Time(s): {:.4f}'.format(total_time))
+        avg_sols = np.mean(sols, axis=0)
+        file_name="/home/pjy/mycode/pareto_results/SMODACT_MASTER_MOTSP_"+str(problem.size)+"_"+opts.step_method+str(opts.T_max)+"_"+str(opts.n_sols)+"_"+opts.test_data+".txt"
+        with open(file_name,'w') as f:  
+            for i in range(n_sols):
+                f.write(str([avg_sols[i,0],avg_sols[i,1]])+"\n")
+    
+    
+     
+        fig = plt.figure()
+
+        plt.plot(avg_sols[:,0],avg_sols[:,1], marker = 'o', c = 'C1',ms = 3,  label='SMODACT_MASTER_MOTSP_'+str(problem.size)+'_randomData_'+opts.step_method + str(opts.T_max) + "_" + str(opts.n_sols)+opts.test_data)
+    
+        plt.legend()
+        plt.savefig("./SMODACT_MASTER_MOTSP_"+str(problem.size)+"_randomData_"+opts.step_method + str(opts.T_max) + "_" + str(opts.n_sols)+opts.test_data) 

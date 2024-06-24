@@ -620,6 +620,7 @@ class EmbeddingNet(nn.Module):
          if visited_time is None:
              visited_time = torch.zeros((batch_size,seq_length),device = solutions.device)
              pre = torch.zeros((batch_size),device = solutions.device).long()
+             # visited_time 意思是求出每个城市是第几个被访问的，visited_time[0] = 1 指0号城市第1个被访问的
              for i in range(seq_length):
                 visited_time[arange,solutions[arange,pre]] = i+1
                 pre = solutions[arange,pre]

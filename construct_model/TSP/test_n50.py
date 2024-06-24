@@ -60,7 +60,7 @@ tester_params = {
     'use_cuda': USE_CUDA,
     'cuda_device_num': CUDA_DEVICE_NUM,
     'model_load': {
-        'path': '/home/pjy/OPEN_SOURCE_CODE/VRP-DACT/construct_model/TSP/construct_model_TSP/50_reasonable',  # directory path of pre-trained model and log files saved.
+        'path': '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/construct_model_TSP/50_reasonable',  # directory path of pre-trained model and log files saved.
         'epoch': 200,  # epoch version of pre-trained model to laod.
     },
     'test_episodes': 200,

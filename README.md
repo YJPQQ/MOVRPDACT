@@ -48,6 +48,28 @@ Training data is generated on the fly. Please follow repo [wouterkool/attention-
 ### TSP example
 
 
+For training TSP instances with 150 nodes and GPU cards {0}:
+```python
+
+
+
+
+# 不预先构造解 64维度 ws bs=100 1个epoch:40batch 每个batch train200步
+CUDA_VISIBLE_DEVICES=3  python run.py --problem tsp --graph_size 150 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size150.pt' --run_name 'direct2improve_tsp_150_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lrmodel_6e-5' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 100 --epoch_size 4000 --lr_model 0.00006 --lr_critic 0.00002  --validate_interval 10 > direct2improve_tsp_150_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_6e-5.txt 
+
+# 不预先构造解 64维度 ws bs=100 1个epoch:40batch 每个batch train200步 -lr_model 0.00003 --lr_critic 0.00001
+CUDA_VISIBLE_DEVICES=3  python run.py --problem tsp --graph_size 150 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size150.pt' --run_name 'direct2improve_tsp_150_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lrmodel_3e-5' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 100 --epoch_size 4000 --lr_model 0.00003 --lr_critic 0.00001  --validate_interval 10 > direct2improve_tsp_150_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_3e-5.txt 
+
+# 不预先构造解 64维度 ws bs=100 1个epoch:40batch 每个batch train200步 -lr_model 0.00005 --lr_critic 0.000015
+CUDA_VISIBLE_DEVICES=3  python run.py --problem tsp --graph_size 150 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size150.pt' --run_name 'direct2improve_tsp_150_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lrmodel_5e-5' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 100 --epoch_size 4000 --lr_model 0.00005 --lr_critic 0.000015  --validate_interval 10 > direct2improve_tsp_150_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_5e-5.txt 
+
+
+
+
+
+```
+
+
 For training TSP instances with 100 nodes and GPU cards {0}:
 ```python
 
@@ -57,13 +79,83 @@ CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 100 --step_metho
 
 
 # 不预先构造解 64维度 ws bs=128 1个epoch:40batch 每个batch train200步
-CUDA_VISIBLE_DEVICES=1 python run.py --problem tsp --graph_size 100 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/OPEN_SOURCE_CODE/VRP-DACT/data/testdata_tsp_size100.pt' --run_name 'direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 6 --batch_size 128 --epoch_size 5120 --validate_interval 5 > direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch.txt 
+CUDA_VISIBLE_DEVICES=1 python run.py --problem tsp --graph_size 100 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/OPEN_SOURCE_CODE/VRP-DACT/data/testdata_tsp_size100.pt' --run_name 'direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 128 --epoch_size 5120 --validate_interval 5 > direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch.txt 
+
+
+# 不预先构造解 64维度 ws bs=128 1个epoch:40batch 每个batch train200步 --lr_model 4e-5 --lr_critic 2e-5
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 100 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size100.pt' --run_name 'direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lr_model4e-5_lr_critic_2e-5' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 128 --epoch_size 5120 --validate_interval 10 --lr_model 0.00004 --lr_critic 0.00002 > direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lr_model4e-5_lr_critic_2e-5.txt 
+
+
+# 不预先构造解 64维度 ws bs=128 1个epoch:40batch 每个batch train200步 --lr_model 7e-5 --lr_critic 2e-5
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 100 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size100.pt' --run_name 'direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lr_model_7e-5_lr_critic_2e-5' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 128 --epoch_size 5120 --validate_interval 10 --lr_model 0.00007 --lr_critic 0.00002 > direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lr_model_7e-5_lr_critic_2e-5.txt 
+
+# 不预先构造解 64维度 ws bs=128 1个epoch:40batch 每个batch train200步 --lr_model 7e-5 --lr_critic 2e-5 --hidden_dim 128 
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 100 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size100.pt' --run_name 'direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lr_model_7e-5_lr_critic_2e-5_hidden_dim_128' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 128 --hidden_dim 128 --n_encode_layers 3 --batch_size 128 --epoch_size 5120 --validate_interval 10 --lr_model 0.00007 --lr_critic 0.00002 > direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lr_model_7e-5_lr_critic_2e-5_hidden_dim_128.txt 
+
+
+# 不预先构造解 64维度 ws bs=128 1个epoch:40batch 每个batch train200步 --lr_model 7e-5 --lr_critic 3e-5
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 100 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size100.pt' --run_name 'direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lr_model_7e-5_lr_critic_3e-5' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 128 --epoch_size 5120 --validate_interval 10 --lr_model 0.00007 --lr_critic 0.00003 > direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lr_model_7e-5_lr_critic_3e-5.txt 
+
+
+# 不预先构造解 64维度 ws bs=128 1个epoch:40batch 每个batch train200步 --lr_model 6e-6 --lr_critic 2e-6 小学习率从epoch-179继续学习
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 100 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size100.pt' --run_name 'direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lr_model_6e-6_lr_critic_2e-6_continue_learning' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 128 --epoch_size 5120 --validate_interval 10 --lr_model 0.000006 --lr_critic 0.000002 --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/direct_pretrain_model/100/epoch-179.pt' > direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lr_model_6e-6_lr_critic_2e-6_continue_learning.txt 
+
+
+
+# 不预先构造解 64维度 ws bs=128 1个epoch:40batch 每个batch train200步 --lr_model 1e-4 --lr_critic 3e-5 --step_method swap
+CUDA_VISIBLE_DEVICES=2 python run.py --problem tsp --graph_size 100 --step_method swap --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size100.pt' --run_name 'direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lr_model_1e-4_lr_critic_3e-5_swap' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 128 --epoch_size 5120 --validate_interval 10  > direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lr_model_1e-4_lr_critic_3e-5_swap.txt 
+
+# 不预先构造解 64维度 ws bs=128 1个epoch:40batch 每个batch train200步 --lr_model 1e-4 --lr_critic 3e-5 --step_method 2_opt
+CUDA_VISIBLE_DEVICES=2 python run.py --problem tsp --graph_size 100 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size100.pt' --run_name 'direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lr_model_1e-4_lr_critic_3e-5_2_opt' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 128 --epoch_size 5120 --validate_interval 5  > direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lr_model_1e-4_lr_critic_3e-5_2_opt.txt 
+
+
+# 不预先构造解 64维度 ws bs=128 1个epoch:40batch 每个batch train200步 --lr_model 6e-5 --lr_critic 2e-5 --step_method swap
+CUDA_VISIBLE_DEVICES=0 python run.py --problem tsp --graph_size 100 --step_method swap --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size100.pt' --run_name 'direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lr_model_6e-5_swap' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 128 --epoch_size 5120 --lr_model 0.00006 --lr_critic 0.00002 --validate_interval 10  > direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lr_model_6e-5_swap.txt 
+
+
+# 不预先构造解 64维度 ws bs=128 1个epoch:40batch 每个batch train200步 --lr_model 6e-5 --lr_critic 2e-5 --step_method insert
+CUDA_VISIBLE_DEVICES=2 python run.py --problem tsp --graph_size 100 --step_method insert --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size100.pt' --run_name 'direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lr_model_6e-5_insert' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 128 --epoch_size 5120 --lr_model 0.00006 --lr_critic 0.00002 --validate_interval 10  > direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lr_model_6e-5_insert.txt 
+
+
+
+
+
 
 
 
 
 # 预先构造解 64维度 ws bs=128 T_train=300 --construct_begin_epoch 10
 CUDA_VISIBLE_DEVICES=4 python run.py --problem tsp --graph_size 100 --step_method 2_opt --n_step 4 --T_train 300 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/OPEN_SOURCE_CODE/VRP-DACT/data/testdata_tsp_size100.pt' --run_name 'construct2improve_example_training_TSP100_ws_normal_model_PFE_2_EMBEDDER_batchsize_128_Ttrain300_epoch10' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 128 --epoch_size 2560 --construct_begin_epoch 10 --with_construct_before > construct2improve_tsp_100_ws_model_normal_PFE_2_EMBEDDER_Ttrain300_20batch_epoch10.txt 
+
+
+
+
+# 预先构造解 64维度 ws bs=128 T_train=200 --construct_begin_epoch 1 --construct_end_epoch 15  -epoch_end 150 --epochs_each_construct_epoch_to_learn 10 带最好direct初始参数的improve模型再去更新 --lr_decay 0.985
+CUDA_VISIBLE_DEVICES=0 python run.py --problem tsp --graph_size 100 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size100.pt' --run_name 'construct2improve_example_training_TSP100_ws_normal_model_PFE_1_EMBEDDER_batchsize_128_Ttrain200_constructbegin_1_constructend_15_loadepoch74_total_150epoch_lr0_985' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 128 --epoch_size 5120 --construct_begin_epoch 1 --construct_end_epoch 15 --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/direct_pretrain_model/100/epoch-74.pt' --epoch_end 150 --epochs_each_construct_epoch_to_learn 10  --lr_decay 0.985 --lr_model 0.00006 --with_construct_before > construct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_constructbegin_1_constructend_15_loadepoch74_total_150epoch_lr0_985_lrmodel_6e-5.txt 
+
+
+# 预先构造解 64维度 ws bs=128 T_train=200 --construct_begin_epoch 1 --construct_end_epoch 15  -epoch_end 150 --epochs_each_construct_epoch_to_learn 10 带最好direct初始参数的improve模型再去更新 --lr_decay 0.99
+CUDA_VISIBLE_DEVICES=0 python run.py --problem tsp --graph_size 100 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size100.pt' --run_name 'construct2improve_example_training_TSP100_ws_normal_model_PFE_1_EMBEDDER_batchsize_128_Ttrain200_constructbegin_1_constructend_15_loadepoch109_total_150epoch_lr0_99' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 128 --epoch_size 5120 --construct_begin_epoch 1 --construct_end_epoch 15 --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/direct_pretrain_model/100/epoch-109.pt' --epoch_end 150 --epochs_each_construct_epoch_to_learn 10  --lr_decay 0.99 --lr_model 0.00003 --lr_critic 0.000009 --with_construct_before > construct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_constructbegin_1_constructend_15_loadepoch109_total_150epoch_lr0_99_lrmodel_3e-5.txt 
+
+
+# 预先构造解 64维度 ws bs=128 T_train=200 --construct_begin_epoch 1 --construct_end_epoch 21  -epoch_end 210 --epochs_each_construct_epoch_to_learn 10 带最好direct初始参数的improve模型再去更新 --lr_decay 0.994
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 100 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size100.pt' --run_name 'construct2improve_example_training_TSP100_ws_normal_model_PFE_1_EMBEDDER_batchsize_128_Ttrain200_constructbegin_1_constructend_21_loadepoch109_total_210epoch_lrdecay0_994' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 128 --epoch_size 5120 --construct_begin_epoch 1 --construct_end_epoch 21 --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/direct_pretrain_model/100/epoch-109.pt' --epoch_end 210 --epochs_each_construct_epoch_to_learn 10  --lr_decay 0.994 --lr_model 0.00003 --lr_critic 0.000009 --with_construct_before > construct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_constructbegin_1_constructend_21_loadepoch109_total_210epoch_lr0_994_lrmodel_3e-5.txt 
+
+
+
+# 预先构造解 64维度 ws bs=128 T_train=200 --construct_begin_epoch 1 --construct_end_epoch 21  -epoch_end 210 --epochs_each_construct_epoch_to_learn 10 带最好direct初始参数的improve模型再去更新 --lr_decay 0.994
+CUDA_VISIBLE_DEVICES=2 python run.py --problem tsp --graph_size 100 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size100.pt' --run_name 'construct2improve_example_training_TSP100_ws_normal_model_PFE_1_EMBEDDER_batchsize_128_Ttrain200_constructbegin_1_constructend_21_loadepoch109_total_210epoch_lrdecay0_994' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 128 --epoch_size 5120 --construct_begin_epoch 1 --construct_end_epoch 21 --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/direct_pretrain_model/100/epoch-109.pt' --epoch_end 210 --epochs_each_construct_epoch_to_learn 10  --lr_decay 0.994 --lr_model 0.00001 --lr_critic 0.000004 --with_construct_before > construct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_constructbegin_1_constructend_21_loadepoch109_total_210epoch_lr0_994_lrmodel_1e-5.txt 
+
+
+
+
+# 预先构造解 64维度 ws bs=128 T_train=200 --construct_begin_epoch 1 --construct_end_epoch 21  -epoch_end 210 --epochs_each_construct_epoch_to_learn 10 带最好direct初始参数的improve模型再去更新 --lr_decay 0.99 --lr_model 8e-6 --lr_critic 3e-6
+CUDA_VISIBLE_DEVICES=0  python run.py --problem tsp --graph_size 100 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size100.pt' --run_name 'construct2improve_example_training_TSP100_ws_normal_model_PFE_1_EMBEDDER_batchsize_128_Ttrain200_constructbegin_1_constructend_21_loadepoch109_total_210epoch_lrdecay0_99_lr_model_8e-6 ' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 128 --epoch_size 5120 --construct_begin_epoch 1 --construct_end_epoch 21 --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/direct_pretrain_model/100/epoch-109.pt' --epoch_end 210 --epochs_each_construct_epoch_to_learn 10  --lr_decay 0.99 --lr_model 0.000008 --lr_critic 0.000003 --with_construct_before > construct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_constructbegin_1_constructend_21_loadepoch109_total_210epoch_lr0_99_lrmodel_8e-6.txt 
+
+
+# 预先构造解 64维度 ws bs=128 T_train=200 --construct_begin_epoch 1 --construct_end_epoch 21  -epoch_end 210 --epochs_each_construct_epoch_to_learn 10 带最好direct初始参数的improve模型再去更新 --lr_decay 0.994 --step_method insert 
+CUDA_VISIBLE_DEVICES=1 python run.py --problem tsp --graph_size 100 --step_method insert --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size100.pt' --run_name 'construct2improve_example_training_TSP100_ws_normal_model_PFE_1_EMBEDDER_batchsize_128_Ttrain200_constructbegin_1_constructend_21_loadepoch89_total_210epoch_lrdecay0_994_insert' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 128 --epoch_size 5120 --construct_begin_epoch 1 --construct_end_epoch 21 --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/direct_pretrain_model/100/insert/epoch-89.pt' --epoch_end 210 --epochs_each_construct_epoch_to_learn 10  --lr_decay 0.994 --lr_model 0.00001 --lr_critic 0.000004 --with_construct_before > construct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_constructbegin_1_constructend_21_loadepoch89_total_210epoch_lr0_994_lrmodel_1e-5_insert.txt 
+
 
 
 ```
@@ -134,7 +226,8 @@ CUDA_VISIBLE_DEVICES=0 python run.py --problem tsp --graph_size 50 --step_method
 CUDA_VISIBLE_DEVICES=4 python run.py --problem tsp --graph_size 50 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/OPEN_SOURCE_CODE/VRP-DACT/data/testdata_tsp_size50.pt' --run_name 'construct2improve_example_training_TSP50_ws_normal_model_PFE_2_EMBEDDER_batchsize_256_Ttrain200_constructbegin_1_constructend_13_loadepoch199_total_260epoch_lr_decay_0_989' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 256 --epoch_size 10240 --construct_begin_epoch 1 --construct_end_epoch 13 --load_path '/home/pjy/OPEN_SOURCE_CODE/VRP-DACT/construct_model/TSP/outputs/tsp_50/direct2improve_example_training_TSP50_ws_normal_model_PFE_2_EMBEDDER_batchsize_256_20240127T183349/epoch-199.pt' --epoch_end 260 --epochs_each_construct_epoch_to_learn 20  --lr_decay 0.989 --with_construct_before > construct2improve_tsp_50_ws_model_normal_PFE_2_EMBEDDER_Ttrain200_40batch_constructbegin_1_constructend_13_loadepoch199_total_260epoch_lr_decay_0_989.txt 
 
 
-
+# 预先构造解 64维度 ws bs=256 T_train=200 --construct_begin_epoch 1 --construct_end_epoch 13  -epoch_end 130 --epochs_each_construct_epoch_to_learn 10 带最好direct初始参数的improve模型再去更新 --lr_decay 0.984 
+CUDA_VISIBLE_DEVICES=2 python run.py --problem tsp --graph_size 50 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size50.pt' --run_name 'construct2improve_example_training_TSP50_ws_normal_model_PFE_1_EMBEDDER_batchsize_256_Ttrain200_constructbegin_1_constructend_13_loadepoch89_total_130epoch_lr0_984' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 256 --epoch_size 10240 --construct_begin_epoch 1 --construct_end_epoch 13 --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/direct_pretrain_model/50/epoch-89.pt' --epoch_end 130 --epochs_each_construct_epoch_to_learn 10  --lr_decay 0.984 --with_construct_before > construct2improve_tsp_50_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_constructbegin_1_constructend_13_loadepoch89_total_130epoch_lr0_984.txt 
 
 
 
@@ -147,6 +240,9 @@ CUDA_VISIBLE_DEVICES=1 python run.py --problem tsp --graph_size 50 --step_method
 # 不预先构造解 64维度 ws bs=256
 CUDA_VISIBLE_DEVICES=1 python run.py --problem tsp --graph_size 50 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/OPEN_SOURCE_CODE/VRP-DACT/data/testdata_tsp_size50.pt' --run_name 'direct2improve_example_training_TSP50_ws_normal_model_PFE_2_EMBEDDER_batchsize_256' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 256 --epoch_size 10240  > direct2improve_tsp_50_ws_model_normal_PFE_2_EMBEDDER.txt 
 
+
+# 不预先构造解 64维度 ws bs=256 1个epoch:40batch 每个batch train200步
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 50 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size50.pt' --run_name 'direct2improve_tsp_50_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 256 --epoch_size 10240 --validate_interval 10 > direct2improve_tsp_50_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch.txt 
 
 
 ```
@@ -172,6 +268,13 @@ CUDA_VISIBLE_DEVICES=2 python run.py --problem tsp --graph_size 20 --step_method
 CUDA_VISIBLE_DEVICES=1 python run.py --problem tsp --graph_size 20 --step_method 2_opt --n_step 4 --T_train 300 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/OPEN_SOURCE_CODE/VRP-DACT/data/testdata_tsp_size20.pt' --run_name 'construct2improve_example_training_TSP20_ws_normal_model_PFE_2_EMBEDDER_batchsize_128_Ttrain300_epoch5' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 128 --epoch_size 2560 --construct_begin_epoch 5 --with_construct_before > construct2improve_tsp_20_ws_model_normal_PFE_2_EMBEDDER_Ttrain300_20batch_epoch5.txt 
 
 
+# 预先构造解 64维度 ws bs=256 T_train=200 --construct_begin_epoch 1 --construct_end_epoch 17  -epoch_end 170 --epochs_each_construct_epoch_to_learn 10 带最好direct初始参数的improve模型再去更新 --lr_decay 0.985 
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 20 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size20.pt' --run_name 'construct2improve_example_training_TSP20_ws_normal_model_PFE_1_EMBEDDER_batchsize_256_Ttrain200_constructbegin_1_constructend_17_loadepoch119_total_170epoch_lr0_985' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 256 --epoch_size 10240 --construct_begin_epoch 1 --construct_end_epoch 17 --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/direct_pretrain_model/20/epoch-119.pt' --epoch_end 170 --epochs_each_construct_epoch_to_learn 10  --lr_decay 0.985 --with_construct_before > construct2improve_tsp_20_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_constructbegin_1_constructend_17_loadepoch119_total_170epoch_lrdecay0_985.txt 
+
+# 预先构造解 64维度 ws bs=256 T_train=200 --construct_begin_epoch 1 --construct_end_epoch 17  -epoch_end 170 --epochs_each_construct_epoch_to_learn 10 带最好direct初始参数的improve模型再去更新 --lr_decay 0.985 
+CUDA_VISIBLE_DEVICES=1 python run.py --problem tsp --graph_size 20 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size20.pt' --run_name 'construct2improve_example_training_TSP20_ws_normal_model_PFE_1_EMBEDDER_batchsize_256_Ttrain200_constructbegin_1_constructend_17_loadepoch119_total_170epoch_lr0_985_lrmodel5e-5' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 256 --epoch_size 10240 --construct_begin_epoch 1 --construct_end_epoch 17 --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/direct_pretrain_model/20/epoch-119.pt' --epoch_end 170 --epochs_each_construct_epoch_to_learn 10  --lr_decay 0.985 --lr_model 0.00005 --lr_critic 0.00003 --with_construct_before > construct2improve_tsp_20_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_constructbegin_1_constructend_17_loadepoch119_total_170epoch_lrdecay0_985_lrmodel5e-5.txt 
+
+
 
 
 
@@ -184,7 +287,7 @@ CUDA_VISIBLE_DEVICES=4 python run.py --problem tsp --graph_size 20 --step_method
 # 不预先构造解 64维度 ws bs=256
 CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 20 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/OPEN_SOURCE_CODE/VRP-DACT/data/testdata_tsp_size20.pt' --run_name 'direct2improve_example_training_TSP20_ws_normal_model_PFE_2_EMBEDDER_batchsize_256' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 256 --epoch_size 10240  > direct2improve_tsp_20_ws_normal_model_PFE_2_EMBEDDER.txt 
 
-
+CUDA_VISIBLE_DEVICES=2 python run.py --problem tsp --graph_size 20 --step_method 2_opt --n_step 4 --T_train 200 --Xi_CL 2 --best_cl --max_grad_norm 0.2 --val_m 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size20.pt' --run_name 'direct2improve_tsp_20_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch' --dec_method 'WS' --DACTencoder_head_num 4 --DACTdecoder_head_num 4 --embedding_dim 64 --hidden_dim 64 --n_encode_layers 3 --batch_size 256 --epoch_size 10240 --validate_interval 10 > direct2improve_tsp_20_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch.txt 
 
 ```
 
@@ -228,20 +331,89 @@ CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 50 --step_method
 CUDA_VISIBLE_DEVICES=1 python run.py --problem tsp --graph_size 50 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/OPEN_SOURCE_CODE/VRP-DACT/construct_model/TSP/outputs/tsp_50/direct2improve_example_training_TSP50_ws_normal_model_PFE_2_EMBEDDER_batchsize_256_20240127T183349/epoch-199.pt' --T_max 1500 --val_size 200 --val_dataset  '/home/pjy/OPEN_SOURCE_CODE/VRP-DACT/data/testdata_tsp_size50.pt' --val_m 1 --no_saving --no_tb
 
 
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 20 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_20/direct2improve_tsp_20_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_20240206T204247/epoch-169.pt' --T_max 1500 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size20.pt' --val_m 1 --no_saving --no_tb  --n_sols 101
+
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 50 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_50/direct2improve_tsp_50_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_20240206T203603/epoch-199.pt' --T_max 1500 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size50.pt' --val_m 1 --no_saving --no_tb  --n_sols 101
+
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 100 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/direct_pretrain_model/100/epoch-179.pt' --T_max 1500 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size100.pt' --val_m 1 --no_saving --no_tb  --n_sols 101
+
+
+#insert
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 20 --step_method insert --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/direct_pretrain_model/100/epoch-179.pt' --T_max 1500 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size20.pt' --val_m 1 --no_saving --no_tb  --n_sols 101
+
+CUDA_VISIBLE_DEVICES=0 python run.py --problem tsp --graph_size 50 --step_method insert --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/direct_pretrain_model/100/epoch-179.pt' --T_max 1500 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size50.pt' --val_m 1 --no_saving --no_tb  --n_sols 101
+
+CUDA_VISIBLE_DEVICES=0 python run.py --problem tsp --graph_size 100 --step_method insert --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_100/direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lr_model_6e-5_insert_20240220T015249/epoch-199.pt' --T_max 1500 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size100.pt' --val_m 1 --no_saving --no_tb  --n_sols 101
+
+#swap
+CUDA_VISIBLE_DEVICES=0 python run.py --problem tsp --graph_size 100 --step_method swap --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_100/direct2improve_tsp_100_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_lr_model_6e-5_swap_20240221T151026/epoch-149.pt' --T_max 1500 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size100.pt' --val_m 1 --no_saving --no_tb  --n_sols 101
+
+#改进步数消融
+
+CUDA_VISIBLE_DEVICES=0 python run.py --problem tsp --graph_size 50 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_50/direct2improve_tsp_50_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_20240206T203603/epoch-199.pt' --T_max 500 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size50.pt' --val_m 1 --no_saving --no_tb  --n_sols 40
+
+CUDA_VISIBLE_DEVICES=0 python run.py --problem tsp --graph_size 50 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_50/direct2improve_tsp_50_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_20240206T203603/epoch-199.pt' --T_max 1000 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size50.pt' --val_m 1 --no_saving --no_tb  --n_sols 40
+
+CUDA_VISIBLE_DEVICES=0 python run.py --problem tsp --graph_size 50 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_50/direct2improve_tsp_50_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_20240206T203603/epoch-199.pt' --T_max 1500 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size50.pt' --val_m 1 --no_saving --no_tb  --n_sols 40
+
+CUDA_VISIBLE_DEVICES=0 python run.py --problem tsp --graph_size 50 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_50/direct2improve_tsp_50_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_20240206T203603/epoch-199.pt' --T_max 3000 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size50.pt' --val_m 1 --no_saving --no_tb  --n_sols 40
+
+CUDA_VISIBLE_DEVICES=0 python run.py --problem tsp --graph_size 50 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_50/direct2improve_tsp_50_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_20240206T203603/epoch-199.pt' --T_max 5000 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size50.pt' --val_m 1 --no_saving --no_tb  --n_sols 40
+
+CUDA_VISIBLE_DEVICES=0 python run.py --problem tsp --graph_size 50 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_50/direct2improve_tsp_50_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_20240206T203603/epoch-199.pt' --T_max 7000 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size50.pt' --val_m 1 --no_saving --no_tb  --n_sols 40
+
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 50 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_50/direct2improve_tsp_50_ws_model_normal_PFE_1_EMBEDDER_Ttrain200_40batch_20240206T203603/epoch-199.pt' --T_max 9000 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size50.pt' --val_m 1 --no_saving --no_tb  --n_sols 40
+
+#标准测试kroab100
+CUDA_VISIBLE_DEVICES=0 python run.py --problem tsp --graph_size 100 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/direct_pretrain_model/100/epoch-179.pt' --T_max 1500 --val_size 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/kro_2obj/kroAB100.pt' --val_m 1 --no_saving --no_tb  --n_sols 101 --test_data "kroab"
+
+#标准测试krobc100
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 100 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/direct_pretrain_model/100/epoch-179.pt' --T_max 1500 --val_size 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/kro_2obj/kroBC100.pt' --val_m 1 --no_saving --no_tb  --n_sols 101 --test_data "krobc"
+
+
+
+
+
+
 #预先构造解
 
-CUDA_VISIBLE_DEVICES=1 python run.py --problem tsp --graph_size 50 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/OPEN_SOURCE_CODE/VRP-DACT/construct_model/TSP/outputs/tsp_50/construct2improve_example_training_TSP50_ws_normal_model_PFE_2_EMBEDDER_batchsize_256_Ttrain500_constructbegin_0_constructend_20_loadepoch0_20240201T025601/epoch-1.pt' --T_max 1500 --val_size 200 --val_dataset  '/home/pjy/OPEN_SOURCE_CODE/VRP-DACT/data/testdata_tsp_size50.pt' --val_m 1 --no_saving --no_tb --construct_begin_epoch 1 --with_construct_before
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 20 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_20/construct2improve_example_training_TSP20_ws_normal_model_PFE_1_EMBEDDER_batchsize_256_Ttrain200_constructbegin_1_constructend_17_loadepoch119_total_170epoch_lr0_985_20240210T025955/epoch-169.pt' --T_max 1500 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size20.pt' --val_m 1 --no_saving --no_tb --construct_begin_epoch 17 --with_construct_before  --n_sols 101
+
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 50 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_50/construct2improve_example_training_TSP50_ws_normal_model_PFE_1_EMBEDDER_batchsize_256_Ttrain200_constructbegin_1_constructend_13_loadepoch89_total_130epoch_lr0_984_20240210T011117/epoch-129.pt' --T_max 1500 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size50.pt' --val_m 1 --no_saving --no_tb --construct_begin_epoch 13 --with_construct_before  --n_sols 101
+
+
+
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 100 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_100/construct2improve_example_training_TSP100_ws_normal_model_PFE_1_EMBEDDER_batchsize_128_Ttrain200_constructbegin_1_constructend_21_loadepoch109_total_210epoch_lrdecay0_994_20240213T014059/epoch-209.pt' --T_max 1500 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size100.pt' --val_m 1 --no_saving --no_tb --construct_begin_epoch 21 --with_construct_before --n_sols 101
+
+#insert
+CUDA_VISIBLE_DEVICES=0 python run.py --problem tsp --graph_size 100 --step_method insert --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_100/construct2improve_example_training_TSP100_ws_normal_model_PFE_1_EMBEDDER_batchsize_128_Ttrain200_constructbegin_1_constructend_21_loadepoch89_total_210epoch_lrdecay0_994_insert_20240223T225434/epoch-209.pt' --T_max 1500 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size100.pt' --val_m 1 --no_saving --no_tb --construct_begin_epoch 21 --with_construct_before --n_sols 101
 
 
 
 
+#改进步数消融
+
+CUDA_VISIBLE_DEVICES=0 python run.py --problem tsp --graph_size 50 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_50/construct2improve_example_training_TSP50_ws_normal_model_PFE_1_EMBEDDER_batchsize_256_Ttrain200_constructbegin_1_constructend_13_loadepoch89_total_130epoch_lr0_984_20240210T011117/epoch-129.pt' --T_max 500 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size50.pt' --val_m 1 --no_saving --no_tb --construct_begin_epoch 13 --with_construct_before  --n_sols 40
+
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 50 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_50/construct2improve_example_training_TSP50_ws_normal_model_PFE_1_EMBEDDER_batchsize_256_Ttrain200_constructbegin_1_constructend_13_loadepoch89_total_130epoch_lr0_984_20240210T011117/epoch-129.pt' --T_max 1000 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size50.pt' --val_m 1 --no_saving --no_tb --construct_begin_epoch 13 --with_construct_before  --n_sols 40
+
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 50 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_50/construct2improve_example_training_TSP50_ws_normal_model_PFE_1_EMBEDDER_batchsize_256_Ttrain200_constructbegin_1_constructend_13_loadepoch89_total_130epoch_lr0_984_20240210T011117/epoch-129.pt' --T_max 1500 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size50.pt' --val_m 1 --no_saving --no_tb --construct_begin_epoch 13 --with_construct_before  --n_sols 40
+
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 50 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_50/construct2improve_example_training_TSP50_ws_normal_model_PFE_1_EMBEDDER_batchsize_256_Ttrain200_constructbegin_1_constructend_13_loadepoch89_total_130epoch_lr0_984_20240210T011117/epoch-129.pt' --T_max 3000 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size50.pt' --val_m 1 --no_saving --no_tb --construct_begin_epoch 13 --with_construct_before  --n_sols 40
+
+CUDA_VISIBLE_DEVICES=1 python run.py --problem tsp --graph_size 50 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_50/construct2improve_example_training_TSP50_ws_normal_model_PFE_1_EMBEDDER_batchsize_256_Ttrain200_constructbegin_1_constructend_13_loadepoch89_total_130epoch_lr0_984_20240210T011117/epoch-129.pt' --T_max 5000 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size50.pt' --val_m 1 --no_saving --no_tb --construct_begin_epoch 13 --with_construct_before  --n_sols 40
+
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 50 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_50/construct2improve_example_training_TSP50_ws_normal_model_PFE_1_EMBEDDER_batchsize_256_Ttrain200_constructbegin_1_constructend_13_loadepoch89_total_130epoch_lr0_984_20240210T011117/epoch-129.pt' --T_max 7000 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size50.pt' --val_m 1 --no_saving --no_tb --construct_begin_epoch 13 --with_construct_before  --n_sols 40
+
+CUDA_VISIBLE_DEVICES=1 python run.py --problem tsp --graph_size 50 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_50/construct2improve_example_training_TSP50_ws_normal_model_PFE_1_EMBEDDER_batchsize_256_Ttrain200_constructbegin_1_constructend_13_loadepoch89_total_130epoch_lr0_984_20240210T011117/epoch-129.pt' --T_max 9000 --val_size 200 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/testdata_tsp_size50.pt' --val_m 1 --no_saving --no_tb --construct_begin_epoch 13 --with_construct_before  --n_sols 40
 
 
+#标准测试 kroab100
+CUDA_VISIBLE_DEVICES=1 python run.py --problem tsp --graph_size 100 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_100/construct2improve_example_training_TSP100_ws_normal_model_PFE_1_EMBEDDER_batchsize_128_Ttrain200_constructbegin_1_constructend_21_loadepoch109_total_210epoch_lrdecay0_994_20240213T014059/epoch-209.pt' --T_max 1500 --val_size 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/kro_2obj/kroAB100.pt' --val_m 1 --no_saving --no_tb --construct_begin_epoch 21 --with_construct_before --n_sols 101 --test_data "kroab"
 
-
-
-
-
+#标准测试 krobc100
+CUDA_VISIBLE_DEVICES=3 python run.py --problem tsp --graph_size 100 --step_method 2_opt --eval_only --init_val_met random --load_path '/home/pjy/mycode/MOVRPDACT/construct_model/TSP/outputs/tsp_100/construct2improve_example_training_TSP100_ws_normal_model_PFE_1_EMBEDDER_batchsize_128_Ttrain200_constructbegin_1_constructend_21_loadepoch109_total_210epoch_lrdecay0_994_20240213T014059/epoch-209.pt' --T_max 1500 --val_size 1 --val_dataset  '/home/pjy/mycode/MOVRPDACT/data/kro_2obj/kroBC100.pt' --val_m 1 --no_saving --no_tb --construct_begin_epoch 21 --with_construct_before --n_sols 101 --test_data "krobc"
+  
 ```
 For inference 512 CVRP instances with 100 nodes and 8 data augments:
 ```python
